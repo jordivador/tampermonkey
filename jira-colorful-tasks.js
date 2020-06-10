@@ -12,7 +12,7 @@
 // ==/UserScript==
 
 const color = "orange";
-const label = "tested";
+const label = "cd";
 const interval = 30000; // Required for change task colors after ajax changes on page.
 
 setInterval(function() {
