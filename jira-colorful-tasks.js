@@ -17,7 +17,6 @@ const interval = 30000; // Required for change task colors after ajax changes on
 
 setInterval(function() {
     'use strict';
-    console.log("executed tamper");
 
     const issues = document.getElementsByClassName('ghx-issue');
     for (let i = 0; i < issues.length; i++) {
