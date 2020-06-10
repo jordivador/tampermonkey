@@ -6,6 +6,9 @@
 // @author       You
 // @match        https://*.atlassian.net/secure/RapidBoard.jspa*
 // @grant        none
+// @homepageURL  https://github.com/jordivador/tampermonkey/
+// @supportURL   https://github.com/jordivador/tampermonkey/issues
+// @updateURL    https://raw.githubusercontent.com/jordivador/tampermonkey/master/jira-colorful-tasks.js
 // ==/UserScript==
 
 const color = "orange";
