@@ -12,7 +12,7 @@
 // ==/UserScript==
 
 const color = "orange";
-const label = "cd";
+const labelRegex = new RegExp("tested");
 const interval = 30000; // Required for change task colors after ajax changes on page.
 
 setInterval(function() {
@@ -22,7 +22,7 @@ setInterval(function() {
     for (let i = 0; i < issues.length; i++) {
         const extraFields = issues[i].getElementsByClassName('ghx-extra-field ');
         for (let j = 0; j < extraFields.length; j++) {
-            if (extraFields[j].getAttribute('data-tooltip').match(/tested/)) {
+            if (extraFields[j].getAttribute('data-tooltip').match(labelRegex)) {
                 issues[i].style['background-color'] = "orange";
             }
         }
