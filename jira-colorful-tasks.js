@@ -11,20 +11,18 @@
 // @updateURL    https://raw.githubusercontent.com/jordivador/tampermonkey/master/jira-colorful-tasks.js
 // ==/UserScript==
 
-const color = "orange";
-const labelRegex = new RegExp("cd");
-const interval = 30000; // Required for change task colors after ajax changes on page.
+(function() {
+	setInterval(checkLabels, 30000); // Required for change task colors after ajax changes on page.
+    setTimeout(checkLabels, 1000);
+})();
 
-setInterval(function() {
-    'use strict';
-
-    const issues = document.getElementsByClassName('ghx-issue');
-    for (let i = 0; i < issues.length; i++) {
-        const extraFields = issues[i].getElementsByClassName('ghx-extra-field ');
-        for (let j = 0; j < extraFields.length; j++) {
-            if (extraFields[j].getAttribute('data-tooltip').match(labelRegex)) {
-                issues[i].style['background-color'] = "orange";
-            }
-        }
-    }
-}, interval);
+function checkLabels() {
+    document.getElementsByClassName('ghx-issue').forEach(issue => {
+        const extraFields = issue.getElementsByClassName('ghx-extra-field');
+        extraFields.forEach(extrafield => {
+			const labels = extrafield.getAttribute('data-tooltip').replace('Labels:', '');
+            if (labels.match(/CD/)) return issue.style['background-color'] = '#FFB589'; // orange
+			if (labels.match(/Reestimated/)) return issue.style['background-color'] = '#A2FCBD'; // green
+        });
+    });
+}
