@@ -18,17 +18,22 @@
 
 const configurations = [
     { "label": "CD", "color": "#FFB589" },
-    { "label": "Reestimated", "color": "#A2FCBD" }
+    { "label": "tested", "color": "#A2FCBD"}
 ];
 
 function checkLabels() {
-    document.getElementsByClassName('ghx-issue').forEach(issue => {
-        const extraFields = issue.getElementsByClassName('ghx-extra-field');
-        extraFields.forEach(extrafield => {
-            const labels = extrafield.getAttribute('data-tooltip').replace('Labels:', '');
-            configurations.forEach(config => {
-                if (labels.match(config.label)) return issue.style['background-color'] = config.color; // orange
-            });
-        });
-    });
+    const issues = document.getElementsByClassName('ghx-issue');
+    if (!issues.length) console.log("No issues found!");
+    for (let i = 0; i < issues.length; i++) {
+       const extraFields = issues[i].getElementsByClassName('ghx-extra-field');
+       for (let j = 0; j < extraFields.length; j++) {
+           const labels = extraFields[j].getAttribute('data-tooltip').replace('Labels:', '');
+           configurations.forEach(config => {
+               if (labels.match(config.label)) {
+                   issues[i].style['background-color'] = config.color;
+                   return;
+               }
+           });
+       }
+   }
 }
